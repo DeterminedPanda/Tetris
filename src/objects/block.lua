@@ -1,10 +1,10 @@
 local Block = Object:extend()
 
-function Block:new(x, y, height, width)
+function Block:new(x, y, width, height)
     self.x = x
     self.y = y
-    self.height = height
     self.width = width
+    self.height = height
 end
 
 function Block:update(dt) 
@@ -12,8 +12,7 @@ function Block:update(dt)
 end
 
 function Block:draw() 
-    love.graphics.setColor(1, 1, 1)
-    love.graphics.rectangle('fill', self.x, self.y, self.height, self.width)
+    love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
 end
 
 return Block
