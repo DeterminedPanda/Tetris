@@ -1,12 +1,11 @@
 local EmptyBlock = Block:extend()
 
--- TODO do I still need the self. vars?
 function EmptyBlock:new(x, y, width, height)
+    EmptyBlock.super:new(x, y, width, height)
     self.x = x
     self.y = y
     self.width = width
     self.height = height
-    EmptyBlock.super:new(x, y, width, height)
 end
 
 function EmptyBlock:update(dt)
@@ -17,6 +16,5 @@ function EmptyBlock:draw()
     love.graphics.setColor(1, 1, 1)
     EmptyBlock.super.draw(self)
 end
-
 
 return EmptyBlock

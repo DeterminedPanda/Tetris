@@ -7,6 +7,22 @@ function StraightBlock:new(x, y, width, height)
     fourth_block = Block(x + (block_size * 3), y, width, height)
 end
 
+function StraightBlock:up()
+
+end
+
+function StraightBlock:left()
+
+end
+
+function StraightBlock:down()
+
+end
+
+function StraightBlock:right()
+
+end
+
 function StraightBlock:update(dt)
 
 end

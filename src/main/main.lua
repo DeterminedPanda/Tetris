@@ -18,6 +18,9 @@ function love.load()
     love.graphics.setBackgroundColor(0.956, 0.258, 0.258)
     fillTable()
 
+    ee = EmptyBlock(123, 456, 1000, 9000)
+    print(ee.height)
+    
     bb = DebugBlock(80, 80, 40, 40)
     field[3][3] = bb 
     cube = Cube(0, 0, block_size, block_size)

@@ -9,12 +9,6 @@ end
 
 function Cube:up() 
     -- its a fucking cube, there is no point in rotating it
-
-    -- TODO delete this. its only for debbuging purposes
-    top_left.y = top_left.y - block_size
-    top_right.y = top_right.y - block_size
-    bottom_left.y = bottom_left.y - block_size
-    bottom_right.y = bottom_right.y - block_size
 end
 
 function Cube:left()
@@ -73,7 +67,7 @@ function Cube:update(dt)
 end
 
 function Cube:draw()
-    love.graphics.setColor(0, 0, 0)
+    love.graphics.setColor(0.858, 0.662, 0)
     top_left:draw()
     top_right:draw()
     bottom_left:draw()
