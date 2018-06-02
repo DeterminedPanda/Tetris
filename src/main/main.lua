@@ -5,6 +5,8 @@ GameField = require('game_field')
 Block = require('block')
 EmptyBlock = require('empty_block')
 Cube = require('cube_block')
+DebugBlock = require('debug_block')
+StraightBlock = require('straight_block')
 
 block_size = 40
 field_width = 10
@@ -16,8 +18,8 @@ function love.load()
     love.graphics.setBackgroundColor(0.956, 0.258, 0.258)
     fillTable()
 
-    bb = Block(0, 40, 40, 40)
-    field[1][2] = bb 
+    bb = DebugBlock(80, 80, 40, 40)
+    field[3][3] = bb 
     cube = Cube(0, 0, block_size, block_size)
     input = Input()
     input:bind('up', function() cube:up() end)

@@ -29,7 +29,7 @@ function fillTable()
     local y = 0
     for i = 1, field_height do
         for j = 1, field_width do
-            empty_block = EmptyBlock(x, y, block_size -1, block_size -1)
+            empty_block = EmptyBlock(x, y, block_size - 1, block_size - 1)
             field[i][j] = empty_block 
             x = x + block_size
         end

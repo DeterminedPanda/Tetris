@@ -1,5 +1,6 @@
 local EmptyBlock = Block:extend()
 
+-- TODO do I still need the self. vars?
 function EmptyBlock:new(x, y, width, height)
     self.x = x
     self.y = y
