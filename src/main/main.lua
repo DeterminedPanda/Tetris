@@ -18,12 +18,10 @@ function love.load()
     love.graphics.setBackgroundColor(0.956, 0.258, 0.258)
     fillTable()
 
-    ee = EmptyBlock(123, 456, 1000, 9000)
-    print(ee.height)
-    
+    -- Debugging stuff
     bb = DebugBlock(80, 80, 40, 40)
     field[3][3] = bb 
-    cube = Cube(0, 0, block_size, block_size)
+    cube = Cube(0, 0, block_size - 1, block_size - 1)
     input = Input()
     input:bind('up', function() cube:up() end)
     input:bind('left', function() cube:left() end)
@@ -44,5 +42,5 @@ function love.draw()
         end
     end
 
-    cube:draw()
+    cube:draw() -- TODO delete this
 end
