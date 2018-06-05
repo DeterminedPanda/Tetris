@@ -20,7 +20,8 @@ function love.load()
 
     -- Debugging stuff
     bb = DebugBlock(80, 80, 40, 40)
-    field[3][3] = bb 
+    gamefield = GameField()
+    gamefield.field[3][3] = bb 
     cube = Cube(0, 0, block_size - 1, block_size - 1)
     input = Input()
     input:bind('up', function() cube:up() end)
@@ -34,13 +35,6 @@ function love.update(dt)
 end
 
 function love.draw()
-   for i = 1, field_height do 
-        for j = 1, field_width do
-            if field[i][j] ~= nil then
-                field[i][j]:draw()
-            end
-        end
-    end
-
+    gamefield:draw()
     cube:draw() -- TODO delete this
 end
