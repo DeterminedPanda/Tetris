@@ -1,3 +1,5 @@
+local GameField = Object:extend()
+
 field = {
                 { nil, nil, nil, nil, nil, nil, nil, nil, nil, nil },
                 { nil, nil, nil, nil, nil, nil, nil, nil, nil, nil },
@@ -23,6 +25,24 @@ field = {
                 { nil, nil, nil, nil, nil, nil, nil, nil, nil, nil }
 }
 
+function GameField:new()
+  fillTable()
+end
+
+function GameField:update(dt)
+  
+end
+
+function GameField:draw()
+   for i = 1, field_height do 
+        for j = 1, field_width do
+            if field[i][j] ~= nil then
+                field[i][j]:draw()
+            end
+        end
+    end
+end
+
 -- fills the table with placeholder blocks
 function fillTable()
     local x = 0
@@ -37,3 +57,5 @@ function fillTable()
         y = y + block_size
     end
 end
+
+return GameField
