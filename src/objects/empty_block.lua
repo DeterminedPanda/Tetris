@@ -1,11 +1,7 @@
 local EmptyBlock = Block:extend()
 
 function EmptyBlock:new(x, y, width, height)
-    EmptyBlock.super:new(x, y, width, height)
-    self.x = x
-    self.y = y
-    self.width = width
-    self.height = height
+    EmptyBlock.super.new(self, x, y, width, height)
 end
 
 function EmptyBlock:update(dt)

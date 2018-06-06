@@ -16,13 +16,13 @@ function love.load()
     love.window.setTitle("Tetris")
     love.window.setMode(800, block_size * field_height) -- block_size * field_height equals the minimum height required to show all 22 rows of blocks
     love.graphics.setBackgroundColor(0.956, 0.258, 0.258)
-    fillTable()
 
     -- Debugging stuff
-    bb = DebugBlock(80, 80, 40, 40)
     gamefield = GameField()
-    gamefield.field[3][3] = bb 
+    field = gamefield.field
     cube = Cube(0, 0, block_size - 1, block_size - 1)
+    debugblock = DebugBlock(80, 80, 40, 40)
+    field[3][3] = debugblock
     input = Input()
     input:bind('up', function() cube:up() end)
     input:bind('left', function() cube:left() end)
@@ -37,4 +37,5 @@ end
 function love.draw()
     gamefield:draw()
     cube:draw() -- TODO delete this
+    debugblock:draw() -- TODO delete this
 end
