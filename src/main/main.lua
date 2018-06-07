@@ -20,9 +20,9 @@ function love.load()
     -- Debugging stuff
     gamefield = GameField()
     field = gamefield.field
-    cube = Cube(0, 0, block_size - 1, block_size - 1)
-    debugblock = DebugBlock(80, 80, 40, 40)
-    field[3][3] = debugblock
+    cube = StraightBlock(0, 0, block_size - 1, block_size - 1)
+    debugblock = DebugBlock(160, 1600, 40, 40)
+    field[5][5] = debugblock
     input = Input()
     input:bind('up', function() cube:up() end)
     input:bind('left', function() cube:left() end)
