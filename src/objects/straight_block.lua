@@ -29,15 +29,23 @@ function StraightBlock:up()
 end
 
 function StraightBlock:left()
-    local first_block_i = (first_block.x / block_size) + 2
-    local first_block_j = (first_block.y / block_size) + 1
-    local second_block_i = (second_block.x / block_size) + 2
+    local first_block_i = (first_block.y / block_size) + 1
+    local first_block_j = (first_block.x / block_size)
+    local second_block_i = (second_block.y / block_size) + 1
+    local second_block_j = (second_block.x / block_size)
+    local third_block_i = (third_block.y / block_size) + 1
+    local third_block_j = (third_block.x / block_size)
+    local fourth_block_i = (fourth_block.y / block_size) + 1
+    local fourth_block_j = (fourth_block.x / block_size) 
 
-
-    first_block.x = first_block.x - block_size
-    second_block.x = second_block.x - block_size
-    third_block.x = third_block.x - block_size
-    fourth_block.x = fourth_block.x - block_size
+    if(field[first_block_i][first_block_j]:is(EmptyBlock) and field[second_block_i][second_block_j]:is(EmptyBlock) and field[third_block_i][third_block_j]:is(EmptyBlock) and field[fourth_block_i][fourth_block_j]:is(EmptyBlock)) then
+        first_block.x = first_block.x - block_size
+        second_block.x = second_block.x - block_size
+        third_block.x = third_block.x - block_size
+        fourth_block.x = fourth_block.x - block_size
+    else 
+        print('collision detected')
+    end
 end
 
 function StraightBlock:down()
@@ -62,10 +70,23 @@ function StraightBlock:down()
 end
 
 function StraightBlock:right()
-    first_block.x = first_block.x + block_size
-    second_block.x = second_block.x + block_size
-    third_block.x = third_block.x + block_size
-    fourth_block.x = fourth_block.x + block_size
+    local first_block_i = (first_block.y / block_size) + 1
+    local first_block_j = (first_block.x / block_size) + 2
+    local second_block_i = (second_block.y / block_size) + 1
+    local second_block_j = (second_block.x / block_size) + 2
+    local third_block_i = (third_block.y / block_size) + 1
+    local third_block_j = (third_block.x / block_size) + 2
+    local fourth_block_i = (fourth_block.y / block_size) + 1
+    local fourth_block_j = (fourth_block.x / block_size) + 2
+
+    if(field[first_block_i][first_block_j]:is(EmptyBlock) and field[second_block_i][second_block_j]:is(EmptyBlock) and field[third_block_i][third_block_j]:is(EmptyBlock) and field[fourth_block_i][fourth_block_j]:is(EmptyBlock)) then
+        first_block.x = first_block.x + block_size
+        second_block.x = second_block.x + block_size
+        third_block.x = third_block.x + block_size
+        fourth_block.x = fourth_block.x + block_size
+    else 
+        print('collision detected')
+    end
 end
 
 function StraightBlock:update(dt)

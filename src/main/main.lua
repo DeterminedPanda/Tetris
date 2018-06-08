@@ -21,7 +21,7 @@ function love.load()
     gamefield = GameField()
     field = gamefield.field
     cube = StraightBlock(0, 0, block_size - 1, block_size - 1)
-    debugblock = DebugBlock(160, 1600, 40, 40)
+    debugblock = DebugBlock(160, 160, 40, 40)
     field[5][5] = debugblock
     input = Input()
     input:bind('up', function() cube:up() end)
