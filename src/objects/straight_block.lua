@@ -4,6 +4,7 @@ local first_block = nil
 local second_block = nil
 local third_block = nil
 local fourth_block = nil
+local state = 1
 
 function StraightBlock:new(x, y, width, height)
     first_block = Block(x, y, width, height)
@@ -13,6 +14,16 @@ function StraightBlock:new(x, y, width, height)
 end
 
 function StraightBlock:up()
+    if(state == 1) then
+        self:state_one()
+        state = 2
+    elseif(state == 2) then
+        self:state_two()
+        state = 1
+    end
+end
+
+function StraightBlock:state_one()
     local j = (third_block.x / block_size) + 1 
     local first_block_i = (third_block.y / block_size) - 1 -- calculates the new vertical index position in the field table
     local second_block_i = (third_block.y / block_size) -- calculates the new vertical index position in the field table
@@ -25,6 +36,22 @@ function StraightBlock:up()
             first_block.x, second_block.x, fourth_block.x = third_block.x, third_block.x, third_block.x
     else
         print('collision detected')
+    end
+end
+
+function StraightBlock:state_two() 
+    local i = (third_block.y / block_size) + 1
+    local first_block_j = (third_block.x / block_size) - 1
+    local second_block_j = (third_block.x / block_size)
+    local fourth_block_j = (third_block.x / block_size) + 2
+
+    if(field[i][first_block_j]:is(EmptyBlock) and field[i][second_block_j]:is(EmptyBlock) and field[i][fourth_block_j]:is(EmptyBlock)) then
+        first_block.x = (first_block_j - 1) * block_size
+        second_block.x = (second_block_j - 1) * block_size
+        fourth_block.x = (fourth_block_j - 1) * block_size
+        first_block.y, second_block.y, fourth_block.y = third_block.y, third_block.y, third_block.y
+    else
+        print('collsion detected')
     end
 end
 
