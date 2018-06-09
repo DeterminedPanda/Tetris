@@ -5,6 +5,8 @@ local top_right = nil
 local bottom_left = nil 
 local bottom_right = nil
 
+-- the passed parameters will be assigned to the top_left block.
+-- the values for top_right, bottom_left and bottom_right will be calculated from the passed parameters
 function Cube:new(x, y, width, height) 
     top_left = Block(x, y, width, height)
     top_right = Block(x + block_size, y, width, height)
