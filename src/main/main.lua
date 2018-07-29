@@ -21,7 +21,7 @@ function love.load()
     -- Debugging stuff
     gamefield = GameField()
     field = gamefield.field
-    cube = TeeBlock(0, 0, block_size - 1, block_size - 1)
+    cube = TeeBlock(120, 120, block_size - 1, block_size - 1)
     debugblock = DebugBlock(160, 160, 40, 40)
     field[5][5] = debugblock
     input = Input()

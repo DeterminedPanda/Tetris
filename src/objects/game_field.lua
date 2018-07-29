@@ -33,4 +33,41 @@ function GameField:fillTable()
     end
 end
 
+function isInBounds(block) 
+
+end
+
+function isDownEmpty(field, block)
+	local i = (block.y / block_size) + 2
+	local j = (block.x / block_size) + 1
+	return field[i][j]:is(EmptyBlock)
+end
+
+function moveBelow(block)
+	local i = (block.y / block_size) + 1
+	block.y = i * block_size
+end
+
+function isLeftEmpty(field, block)
+	local i = (block.y / block_size) + 1 
+	local j = (block.x / block_size)
+	return field[i][j]:is(EmptyBlock) 
+end
+
+function moveLeft(block)
+	local j = (block.x / block_size) - 1
+	block.x = j * block_size
+end
+
+function isRightEmpty(field, block)
+	local i = (block.y / block_size) + 1 
+	local j = (block.x / block_size) + 2
+	return field[i][j]:is(EmptyBlock)
+end
+
+function moveRight(block)
+	local j = (block.x / block_size) + 1
+	block.x = j * block_size
+end
+
 return GameField
