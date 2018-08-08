@@ -1,17 +1,20 @@
 local Cube = Object:extend()
 
-local top_left = nil
-local top_right = nil
-local bottom_left = nil 
-local bottom_right = nil
+local block_one = nil
+local block_two = nil
+local block_three = nil 
+local block_four = nil
 
--- the passed parameters will be assigned to the top_left block.
--- the values for top_right, bottom_left and bottom_right will be calculated from the passed parameters
+-- the passed parameters will be assigned to the block_one block.
+-- the values for block_two, block_three and block_four will be calculated from the passed parameters
+-- initially the blocks of the Cube will be aligned like this:
+-- block_one block_two
+-- block_three block_four
 function Cube:new(x, y, width, height) 
-	top_left = Block(x, y, width, height)
-	top_right = Block(x + block_size, y, width, height)
-	bottom_left = Block(x, y + block_size, width, height)
-	bottom_right = Block(x + block_size, y + block_size, width, height)
+	block_one = Block(x, y, width, height)
+	block_two = Block(x + block_size, y, width, height)
+	block_three = Block(x, y + block_size, width, height)
+	block_four = Block(x + block_size, y + block_size, width, height)
 end
 
 function Cube:up() 
@@ -19,50 +22,20 @@ function Cube:up()
 end
 
 function Cube:left()
-	local is_top_left_movable = isLeftEmpty(field, top_left)
-	local is_top_right_movable = isLeftEmpty(field, top_right)
-	local is_bottom_left_movable = isLeftEmpty(field, bottom_left)
-	local is_bottom_right_movable = isLeftEmpty(field, bottom_right)
-
-	if(is_top_left_movable and is_top_right_movable and is_bottom_left_movable and is_bottom_right_movable) then
-		moveLeft(top_left)
-		moveLeft(top_right)
-		moveLeft(bottom_left)
-		moveLeft(bottom_right)
-	else 
-		print('collision detected')
+	if(isLeftEmpty(block_one, block_two, block_three, block_four)) then
+		moveLeft(block_one, block_two, block_three, block_four)
 	end
 end
 
 function Cube:down() 
-	local is_top_left_movable = isDownEmpty(field, top_left)
-	local is_top_right_movable = isDownEmpty(field, top_right)
-	local is_bottom_left_movable = isDownEmpty(field, bottom_left)
-	local is_bottom_right_movable = isDownEmpty(field, bottom_right)
-
-	if(is_top_left_movable and is_top_right_movable and is_bottom_left_movable and is_bottom_right_movable) then
-		moveBelow(top_left)
-		moveBelow(top_right)
-		moveBelow(bottom_left)
-		moveBelow(bottom_right)
-	else 
-		print('collision detected')
+	if(isDownEmpty(block_one, block_two, block_three, block_four)) then
+		moveDown(block_one, block_two, block_three, block_four)
 	end
 end
 
 function Cube:right()
-	local is_top_left_movable = isRightEmpty(field, top_left)
-	local is_top_right_movable = isRightEmpty(field, top_right)
-	local is_bottom_left_movable = isRightEmpty(field, bottom_left)
-	local is_bottom_right_movable = isRightEmpty(field, bottom_right)
-
-	if(is_top_left_movable and is_top_right_movable and is_bottom_left_movable and is_bottom_right_movable) then
-		moveRight(top_left)
-		moveRight(top_right)
-		moveRight(bottom_left)
-		moveRight(bottom_right)
-	else
-		print('collision detected')
+	if(isRightEmpty(block_one, block_two, block_three, block_four)) then
+		moveRight(block_one, block_two, block_three, block_four)
 	end
 end 
 
@@ -72,10 +45,10 @@ end
 
 function Cube:draw()
 	love.graphics.setColor(0.858, 0.662, 0)
-	top_left:draw()
-	top_right:draw()
-	bottom_left:draw()
-	bottom_right:draw()
+	block_one:draw()
+	block_two:draw()
+	block_three:draw()
+	block_four:draw()
 end
 
 return Cube

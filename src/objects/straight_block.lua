@@ -1,19 +1,20 @@
 local StraightBlock = Object:extend()
 
--- this block is initially lying down and aligned like this (from left to right): first_block second_block third_block fourth_block
-local first_block = nil
-local second_block = nil
-local third_block = nil
-local fourth_block = nil
+local block_one = nil
+local block_two = nil
+local block_three = nil
+local block_four = nil
 local state = 1
 
--- the passed parameters will be assigned to the first_block.
--- the values for second_block, third_block and fourth_block will be calculated from the passed parameters
+-- the passed parameters will be assigned to the block_one.
+-- the values for block_two, block_three and block_four will be calculated from the passed parameters
+-- this block is initially lying down and aligned like this:
+-- block_one block_two block_three block_four
 function StraightBlock:new(x, y, width, height)
-	first_block = Block(x, y, width, height)
-	second_block = Block(x + (block_size * 1), y, width, height)
-	third_block = Block(x + (block_size * 2), y, width, height)
-	fourth_block = Block(x + (block_size * 3), y, width, height)
+	block_one = Block(x, y, width, height)
+	block_two = Block(x + (block_size * 1), y, width, height)
+	block_three = Block(x + (block_size * 2), y, width, height)
+	block_four = Block(x + (block_size * 3), y, width, height)
 end
 
 function StraightBlock:up()
@@ -30,18 +31,22 @@ function StraightBlock:up()
 	end
 end
 
--- changes the block from a lying position to a standing position
+-- changes the block from a lying position to a standing position:
+-- block_one
+-- block_two
+-- block_three
+-- block_four
 function StraightBlock:state_one()
-	local j = (third_block.x / block_size) + 1 
-	local first_block_i = (third_block.y / block_size) - 1 -- calculates the new vertical index position in the field table
-	local second_block_i = (third_block.y / block_size) -- calculates the new vertical index position in the field table
-	local fourth_block_i = (third_block.y / block_size) + 2 -- calculates the new vertical index position in the field table
+	local j = (block_three.x / block_size) + 1 
+	local block_one_i = (block_three.y / block_size) - 1 -- calculates the new vertical index position in the field table
+	local block_two_i = (block_three.y / block_size) -- calculates the new vertical index position in the field table
+	local block_four_i = (block_three.y / block_size) + 2 -- calculates the new vertical index position in the field table
 
-	if(field[first_block_i][j]:is(EmptyBlock) and field[second_block_i][j]:is(EmptyBlock) and field[fourth_block_i][j]:is(EmptyBlock)) then
-		first_block.y = (first_block_i - 1) * block_size
-		second_block.y = (second_block_i - 1) * block_size
-		fourth_block.y = (fourth_block_i - 1) * block_size
-		first_block.x, second_block.x, fourth_block.x = third_block.x, third_block.x, third_block.x
+	if(field[block_one_i][j]:is(EmptyBlock) and field[block_two_i][j]:is(EmptyBlock) and field[block_four_i][j]:is(EmptyBlock)) then
+		block_one.y = (block_one_i - 1) * block_size
+		block_two.y = (block_two_i - 1) * block_size
+		block_four.y = (block_four_i - 1) * block_size
+		block_one.x, block_two.x, block_four.x = block_three.x, block_three.x, block_three.x
 		return true
 	else
 		print('collision detected')
@@ -49,18 +54,19 @@ function StraightBlock:state_one()
 	end
 end
 
--- changes the block from a standing position to a lying position
+-- changes the block from a standing position to a lying position:
+-- block_one block_two block_three block_four
 function StraightBlock:state_two() 
-	local i = (third_block.y / block_size) + 1 -- calculates the horizontal index position in the field table
-	local first_block_j = (third_block.x / block_size) - 1 -- calculates the vertical index position in the field table
-	local second_block_j = (third_block.x / block_size) -- calculates the vertical index position in the field table
-	local fourth_block_j = (third_block.x / block_size) + 2 -- calculates the vertical index position in the field table
+	local i = (block_three.y / block_size) + 1 -- calculates the horizontal index position in the field table
+	local block_one_j = (block_three.x / block_size) - 1 -- calculates the vertical index position in the field table
+	local block_two_j = (block_three.x / block_size) -- calculates the vertical index position in the field table
+	local block_four_j = (block_three.x / block_size) + 2 -- calculates the vertical index position in the field table
 
-	if(field[i][first_block_j]:is(EmptyBlock) and field[i][second_block_j]:is(EmptyBlock) and field[i][fourth_block_j]:is(EmptyBlock)) then
-		first_block.x = (first_block_j - 1) * block_size
-		second_block.x = (second_block_j - 1) * block_size
-		fourth_block.x = (fourth_block_j - 1) * block_size
-		first_block.y, second_block.y, fourth_block.y = third_block.y, third_block.y, third_block.y
+	if(field[i][block_one_j]:is(EmptyBlock) and field[i][block_two_j]:is(EmptyBlock) and field[i][block_four_j]:is(EmptyBlock)) then
+		block_one.x = (block_one_j - 1) * block_size
+		block_two.x = (block_two_j - 1) * block_size
+		block_four.x = (block_four_j - 1) * block_size
+		block_one.y, block_two.y, block_four.y = block_three.y, block_three.y, block_three.y
 		return true
 	else
 		print('collsion detected')
@@ -69,65 +75,20 @@ function StraightBlock:state_two()
 end
 
 function StraightBlock:left()
-	local first_block_i = (first_block.y / block_size) + 1 -- calculates the vertical index position in the field table
-	local first_block_j = (first_block.x / block_size) -- calculates the horizontal index position in the field table
-	local second_block_i = (second_block.y / block_size) + 1 -- calculates the vertical index position in the field table
-	local second_block_j = (second_block.x / block_size) -- calculates the horizontal index position in the field table
-	local third_block_i = (third_block.y / block_size) + 1 -- calculates the vertical index position in the field table
-	local third_block_j = (third_block.x / block_size) -- calculates the horizontal index position in the field table
-	local fourth_block_i = (fourth_block.y / block_size) + 1 -- calculates the vertical index position in the field table
-	local fourth_block_j = (fourth_block.x / block_size) -- calculates the horizontal index position in the field table
-
-	if(field[first_block_i][first_block_j]:is(EmptyBlock) and field[second_block_i][second_block_j]:is(EmptyBlock) and field[third_block_i][third_block_j]:is(EmptyBlock) and field[fourth_block_i][fourth_block_j]:is(EmptyBlock)) then
-		first_block.x = first_block.x - block_size
-		second_block.x = second_block.x - block_size
-		third_block.x = third_block.x - block_size
-		fourth_block.x = fourth_block.x - block_size
-	else 
-		print('collision detected')
+	if(isLeftEmpty(block_one, block_two, block_three, block_four)) then
+		moveLeft(block_one, block_two, block_three, block_four)
 	end
 end
 
 function StraightBlock:down()
-	local first_block_i = (first_block.y / block_size) + 2 -- calculates the vertical index position in the field table
-	local first_block_j = (first_block.x / block_size) + 1 -- calculates the horizontal index position in the field table
-	local second_block_i = (second_block.y / block_size) + 2 -- calculates the vertical index position in the field table
-	local second_block_j = (second_block.x / block_size) + 1 -- calculates the horizontal index position in the field table
-	local third_block_i = (third_block.y / block_size) + 2 -- calculates the vertical index position in the field table
-	local third_block_j = (third_block.x / block_size) + 1 -- calculates the horizontal index position in the field table
-	local fourth_block_i = (fourth_block.y / block_size) + 2 -- calculates the vertical index position in the field table
-	local fourth_block_j = (fourth_block.x / block_size) + 1 -- calculates the horizontal index position in the field table
-
-	-- check if there is a block directly under the block
-	if(field[first_block_i][first_block_j]:is(EmptyBlock) and field[second_block_i][second_block_j]:is(EmptyBlock) and 
-		field[third_block_i][third_block_j]:is(EmptyBlock) and field[fourth_block_i][fourth_block_j]:is(EmptyBlock)) then 
-		first_block.y = first_block.y + block_size
-		second_block.y = second_block.y + block_size
-		third_block.y = third_block.y + block_size
-		fourth_block.y = fourth_block.y + block_size
-	else 
-		print("collision detected")
+	if(isDownEmpty(block_one, block_two, block_three, block_four)) then
+		moveDown(block_one, block_two, block_three, block_four)
 	end
 end
 
 function StraightBlock:right()
-	local first_block_i = (first_block.y / block_size) + 1 -- calculates the vertical index position in the field table
-	local first_block_j = (first_block.x / block_size) + 2 -- calculates the horizontal index position in the field table
-	local second_block_i = (second_block.y / block_size) + 1 -- calculates the vertical index position in the field table
-	local second_block_j = (second_block.x / block_size) + 2 -- calculates the horizontal index position in the field table
-	local third_block_i = (third_block.y / block_size) + 1 -- calculates the vertical index position in the field table
-	local third_block_j = (third_block.x / block_size) + 2 -- calculates the horizontal index position in the field table
-	local fourth_block_i = (fourth_block.y / block_size) + 1 -- calculates the vertical index position in the field table
-	local fourth_block_j = (fourth_block.x / block_size) + 2 -- calculates the horizontal index position in the field table
-
-	-- check if there is a block directly to the right of the block
-	if(field[first_block_i][first_block_j]:is(EmptyBlock) and field[second_block_i][second_block_j]:is(EmptyBlock) and field[third_block_i][third_block_j]:is(EmptyBlock) and field[fourth_block_i][fourth_block_j]:is(EmptyBlock)) then
-		first_block.x = first_block.x + block_size
-		second_block.x = second_block.x + block_size
-		third_block.x = third_block.x + block_size
-		fourth_block.x = fourth_block.x + block_size
-	else 
-		print('collision detected')
+	if(isRightEmpty(block_one, block_two, block_three, block_four)) then
+		moveRight(block_one, block_two, block_three, block_four)
 	end
 end
 
@@ -137,10 +98,10 @@ end
 
 function StraightBlock:draw()
 	love.graphics.setColor(0, 0.5, 0)
-	first_block:draw()
-	second_block:draw()
-	third_block:draw()
-	fourth_block:draw()
+	block_one:draw()
+	block_two:draw()
+	block_three:draw()
+	block_four:draw()
 end
 
 return StraightBlock

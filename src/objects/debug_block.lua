@@ -1,5 +1,6 @@
 local DebugBlock = Block:extend()
 
+-- This block is used for collision testing
 function DebugBlock:new(x, y, width, height)
     DebugBlock.super:new(x, y, width, height)
     self.x = x
