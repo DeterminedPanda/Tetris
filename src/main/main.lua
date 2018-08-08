@@ -7,8 +7,8 @@ EmptyBlock = require('empty_block')
 Cube = require('cube_block')
 DebugBlock = require('debug_block')
 StraightBlock = require('straight_block')
-TeeBlock = require('tee_block')
-ZeeBlock = require('zee_block')
+TBlock = require('t_block')
+ZBlock = require('z_block')
 
 block_size = 40
 field_width = 10
@@ -22,7 +22,7 @@ function love.load()
     -- Debugging stuff
     gamefield = GameField()
     field = gamefield.field
-    cube = ZeeBlock(40, 40, block_size - 1, block_size - 1)
+    cube = ZBlock(40, 40, block_size - 1, block_size - 1)
     debugblock = DebugBlock(160, 160, 40, 40)
     field[5][5] = debugblock
     input = Input()

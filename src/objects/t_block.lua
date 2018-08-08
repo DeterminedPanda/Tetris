@@ -1,4 +1,4 @@
-local TeeBlock = Object:extend()
+local TBlock = Object:extend()
 
 -- this block is initially looking like a upside down T. they are aligned like this: 
 -- left_block center_block right_block
@@ -11,14 +11,14 @@ local state = 1
 
 -- the passed parameters will be assigned to bottom_block.
 -- the values for center_block, right_block and left_block will be calculated from the passed parameters
-function TeeBlock:new(x, y, width, height)
+function TBlock:new(x, y, width, height)
 	bottom_block = Block(x, y, width, height)
 	left_block = Block(x - block_size, y - block_size, width, height)
 	center_block = Block(x, y - block_size, width, height)
 	right_block = Block(x + block_size, y - block_size, width, height)
 end
 
-function TeeBlock:up()
+function TBlock:up()
 	if(state == 1) then
 		local success = self:state_one()
 		if(success) then
@@ -46,7 +46,7 @@ end
 --					left_block
 --	bottom_block	center_block 
 --				 	right_block
-function TeeBlock:state_one()
+function TBlock:state_one()
 	local bottom_i = (bottom_block.y / block_size)
 	local bottom_j = (bottom_block.x / block_size)
 	local left_i = (left_block.y / block_size) + 2
@@ -74,7 +74,7 @@ end
 --					bottom_block	
 --		right_block center_block left_block	
 --
-function TeeBlock:state_two()
+function TBlock:state_two()
 	local bottom_i = (bottom_block.y / block_size) 
 	local bottom_j = (bottom_block.x / block_size) + 2
 	local lower_group_i = (center_block.y / block_size) + 1
@@ -102,7 +102,7 @@ end
 --					right_block
 --					center_block	bottom_block
 --					left_block
-function TeeBlock:state_three()
+function TBlock:state_three()
 	local bottom_i = (bottom_block.y / block_size) + 2
 	local bottom_j = (bottom_block.x / block_size) + 2
 	local left_i = (left_block.y / block_size) 
@@ -130,7 +130,7 @@ end
 --
 --		left_block center_block right_block
 --				bottom_block
-function TeeBlock:state_four()
+function TBlock:state_four()
 	local bottom_i = (bottom_block.y / block_size) + 2
 	local bottom_j = (bottom_block.x / block_size) 
 	local upper_group_i = (center_block.y / block_size) + 1
@@ -154,7 +154,7 @@ function TeeBlock:state_four()
 	end
 end
 
-function TeeBlock:left()
+function TBlock:left()
 	local is_bottom_movable = isLeftEmpty(field, bottom_block)
 	local is_left_movable = isLeftEmpty(field, left_block)
 	local is_center_movable = isLeftEmpty(field, center_block)
@@ -170,7 +170,7 @@ function TeeBlock:left()
 	end
 end
 
-function TeeBlock:down()
+function TBlock:down()
 	local is_bottom_movable = isDownEmpty(field, bottom_block)
 	local is_left_movable = isDownEmpty(field, left_block)
 	local is_center_movable = isDownEmpty(field, center_block)
@@ -186,7 +186,7 @@ function TeeBlock:down()
 	end
 end
 
-function TeeBlock:right()
+function TBlock:right()
 	local is_bottom_movable = isRightEmpty(field, bottom_block)
 	local is_left_movable = isRightEmpty(field, left_block)
 	local is_center_movable = isRightEmpty(field, center_block)
@@ -202,11 +202,11 @@ function TeeBlock:right()
 	end
 end
 
-function TeeBlock:update(dt)
+function TBlock:update(dt)
 
 end
 
-function TeeBlock:draw()
+function TBlock:draw()
 	love.graphics.setColor(0.500, 0.500, 0)
 	left_block:draw()
 	center_block:draw()
@@ -214,4 +214,4 @@ function TeeBlock:draw()
 	bottom_block:draw()
 end
 
-return TeeBlock
+return TBlock
