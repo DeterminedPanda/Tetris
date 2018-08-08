@@ -20,20 +20,32 @@ end
 
 function TeeBlock:up()
 	if(state == 1) then
-		self:state_one()
-		state = 2
+		local success = self:state_one()
+		if(success) then
+			state = 2
+		end
 	elseif(state == 2) then
-		self:state_two()
-		state = 3
+		local success = self:state_two()
+		if(success) then
+			state = 3
+		end
 	elseif(state == 3) then
-		self:state_three()
-		state = 4
+		local success = self:state_three()
+		if(success) then
+			state = 4
+		end
 	elseif(state == 4) then
-		self:state_four()
-		state = 1
+		local success = self:state_four()
+		if(success) then
+			state = 1
+		end
 	end
 end
 
+-- the block will change when able to this position:
+--					left_block
+--	bottom_block	center_block 
+--				 	right_block
 function TeeBlock:state_one()
 	local bottom_i = (bottom_block.y / block_size)
 	local bottom_j = (bottom_block.x / block_size)
@@ -51,11 +63,17 @@ function TeeBlock:state_one()
 		center_block.x = (right_group_j - 1) * block_size
 		right_block.y = (right_i - 1) * block_size
 		right_block.x = (right_group_j - 1) * block_size
+		return true
 	else 
 		print('collision detected')
+		return false
 	end
 end
 
+-- the block will change when able to this position:
+--					bottom_block	
+--		right_block center_block left_block	
+--
 function TeeBlock:state_two()
 	local bottom_i = (bottom_block.y / block_size) 
 	local bottom_j = (bottom_block.x / block_size) + 2
@@ -73,11 +91,17 @@ function TeeBlock:state_two()
 		center_block.x = (center_j - 1) * block_size
 		right_block.y = (lower_group_i - 1) * block_size
 		right_block.x = (right_j - 1) * block_size
+		return true
 	else
 		print('collision detected')
+		return false
 	end
 end
 
+-- the block will change when able to this position:
+--					right_block
+--					center_block	bottom_block
+--					left_block
 function TeeBlock:state_three()
 	local bottom_i = (bottom_block.y / block_size) + 2
 	local bottom_j = (bottom_block.x / block_size) + 2
@@ -95,11 +119,17 @@ function TeeBlock:state_three()
 		center_block.x = (left_group_j - 1) * block_size
 		right_block.y = (right_i - 1) * block_size
 		right_block.x = (left_group_j - 1) * block_size
+		return true
 	else 
 		print('collision detected')
+		return false
 	end
 end
 
+-- the block will change when able to this positon:
+--
+--		left_block center_block right_block
+--				bottom_block
 function TeeBlock:state_four()
 	local bottom_i = (bottom_block.y / block_size) + 2
 	local bottom_j = (bottom_block.x / block_size) 
@@ -117,8 +147,10 @@ function TeeBlock:state_four()
 		center_block.x = (center_j - 1) * block_size
 		right_block.y = (upper_group_i - 1) * block_size
 		right_block.x = (right_j - 1) * block_size
+		return true
 	else
 		print('collision detected')
+		return false
 	end
 end
 
