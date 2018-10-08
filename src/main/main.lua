@@ -8,8 +8,9 @@ EmptyBlock = require('empty_block')
 Cube = require('cube_block')
 DebugBlock = require('debug_block')
 StraightBlock = require('straight_block')
-TeeBlock = require('tee_block')
-ZeeBlock = require('zee_block')
+TBlock = require('t_block')
+ZBlock = require('z_block')
+SBlock = require('s_block')
 
 block_size = 40
 field_width = 10
