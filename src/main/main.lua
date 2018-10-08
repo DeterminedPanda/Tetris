@@ -10,7 +10,7 @@ DebugBlock = require('debug_block')
 StraightBlock = require('straight_block')
 TBlock = require('t_block')
 ZBlock = require('z_block')
-SBlock = require('s_block')
+ESSBlock = require('ess_block')
 
 block_size = 40
 field_width = 10
