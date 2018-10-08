@@ -37,18 +37,18 @@ function isInBounds(block)
 
 end
 
-function isDownEmpty(field, block)
+function isDownEmpty(block)
 	local i = (block.y / block_size) + 2
 	local j = (block.x / block_size) + 1
 	return field[i][j]:is(EmptyBlock)
 end
 
-function moveBelow(block)
+function moveDown(block)
 	local i = (block.y / block_size) + 1
 	block.y = i * block_size
 end
 
-function isLeftEmpty(field, block)
+function isLeftEmpty(block)
 	local i = (block.y / block_size) + 1 
 	local j = (block.x / block_size)
 	return field[i][j]:is(EmptyBlock) 
@@ -59,7 +59,7 @@ function moveLeft(block)
 	block.x = j * block_size
 end
 
-function isRightEmpty(field, block)
+function isRightEmpty(block)
 	local i = (block.y / block_size) + 1 
 	local j = (block.x / block_size) + 2
 	return field[i][j]:is(EmptyBlock)

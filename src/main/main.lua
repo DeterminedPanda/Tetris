@@ -2,6 +2,7 @@ package.path = package.path .. ';../../libraries/?.lua;../objects/?.lua'
 Object = require('classic')
 Input = require('input')
 GameField = require('game_field')
+Tetromino = require('tetromino')
 Block = require('block')
 EmptyBlock = require('empty_block')
 Cube = require('cube_block')
@@ -22,7 +23,7 @@ function love.load()
     -- Debugging stuff
     gamefield = GameField()
     field = gamefield.field
-    cube = ZeeBlock(40, 40, block_size - 1, block_size - 1)
+    cube = TeeBlock(40, 40, block_size - 1, block_size - 1)
     debugblock = DebugBlock(160, 160, 40, 40)
     field[5][5] = debugblock
     input = Input()
