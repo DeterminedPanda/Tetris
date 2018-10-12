@@ -1,16 +1,16 @@
-local EmptyBlock = Block:extend()
+local Empty = Block:extend()
 
-function EmptyBlock:new(x, y, width, height)
-    EmptyBlock.super.new(self, x, y, width, height)
+function Empty:new(x, y, width, height)
+    Empty.super.new(self, x, y, width, height)
 end
 
-function EmptyBlock:update(dt)
+function Empty:update(dt)
 
 end
 
-function EmptyBlock:draw()
+function Empty:draw()
     love.graphics.setColor(1, 1, 1)
-    EmptyBlock.super.draw(self)
+    Empty.super.draw(self)
 end
 
-return EmptyBlock
+return Empty

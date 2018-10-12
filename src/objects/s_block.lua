@@ -1,4 +1,4 @@
-local ESSBlock = Tetromino:extend()
+local S = Tetromino:extend()
 
 local state = 1
 
@@ -7,15 +7,15 @@ local state = 1
 -- this block is initially looking like a S and will be aligned like this:
 -- 				block_one block_two
 -- 	block_three block_four
-function SBlock:new(x, y, width, height)
-	ESSBlock.super.new(self)
-	ESSBlock.block_one = Block(x, y, width, height)
-	ESSBlock.block_two = Block(x + block_size, y, width, height)
-	ESSBlock.block_three = Block(x - block_size, y + block_size, width, height) 
-	ESSBlock.block_four = Block(x, y + block_size, width, height)
+function S:new(x, y, width, height)
+	ESS.super.new(self)
+	ESS.block_one = Block(x, y, width, height)
+	ESS.block_two = Block(x + block_size, y, width, height)
+	ESS.block_three = Block(x - block_size, y + block_size, width, height) 
+	ESS.block_four = Block(x, y + block_size, width, height)
 end
 
-function SBlock:up()
+function S:up()
 	if(state == 1) then
 		local success = self:state_one()
 		if(success) then
@@ -29,12 +29,12 @@ function SBlock:up()
 	end
 end
 
-function SBlock:state_one()
+function S:state_one()
 	local block_one_i = 0 
 	local block_one_j = 0
 	if(field[block_one_i][block_one_j]:is(EmptyBlock)) then
-		ESSBlock.block_one.y = (block_one_i - 1) * block_size
-		ESSBlock.block_one.x = (block_one_j - 1) * block_size
+		ESS.block_one.y = (block_one_i - 1) * block_size
+		ESS.block_one.x = (block_one_j - 1) * block_size
 		return true
 	else
 		print('collision detected')
@@ -43,18 +43,18 @@ function SBlock:state_one()
 end
 
 
-function SBlock:state_two()
+function S:state_two()
 
 	return false
 end
 
-function SBlock:update(dt)
+function S:update(dt)
 
 end
 
-function SBlock:draw()
+function S:draw()
 	love.graphics.setColor(0, 0, 1)
-	ESSBlock.super.draw(self)
+	ESS.super.draw(self)
 end
 
-return ESSBlock
+return S 

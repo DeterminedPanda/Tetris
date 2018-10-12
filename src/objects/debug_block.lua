@@ -1,21 +1,21 @@
-local DebugBlock = Block:extend()
+local Debug = Block:extend()
 
 -- This block is used for collision testing
-function DebugBlock:new(x, y, width, height)
-    DebugBlock.super:new(x, y, width, height)
+function Debug:new(x, y, width, height)
+    Debug.super:new(x, y, width, height)
     self.x = x
     self.y = y
     self.width = width
     self.height = height
 end
 
-function DebugBlock:update(dt)
+function Debug:update(dt)
 
 end
 
-function DebugBlock:draw()
+function Debug:draw()
     love.graphics.setColor(0.5, 0.5, 0.5)
-    DebugBlock.super.draw(self)
+    Debug.super.draw(self)
 end
 
-return DebugBlock
+return Debug
