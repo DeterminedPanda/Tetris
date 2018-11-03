@@ -1,5 +1,8 @@
 local Cube = Tetromino:extend()
 
+-- the block will initialy be aligned like this:
+-- block_one 	block_two
+-- block_three 	block_four
 -- the passed parameters will be assigned to block_one.
 -- the values for block_two, block_three and block_four will be calculated from the passed parameters
 function Cube:new(x, y, width, height) 

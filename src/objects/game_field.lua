@@ -55,8 +55,8 @@ function isLeftEmpty(block)
 end
 
 function moveLeft(...)
-	local arg = { ... }
-	for key, value in pairs(arg) do
+	local blocks = { ... }
+	for key, value in pairs(blocks) do
 		local j = (value.x / block_size) - 1
 		value.x = j * block_size
 	end
@@ -69,8 +69,8 @@ function isRightEmpty(block)
 end
 
 function moveRight(...)
-	local arg = { ... }
-	for key, value in pairs(arg) do
+	local blocks = { ... }
+	for key, value in pairs(blocks) do
 		local j = (value.x / block_size) + 1
 		value.x = j * block_size
 	end

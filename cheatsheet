@@ -1,9 +1,0 @@
-create object: var = Object()
-
-make game object: local Name = Object:extend()
-
-function declaration: function name() end
-
-bind button: input:bind('f3', function() [Insert Logic] end)
-
-import library: Name = require('library')

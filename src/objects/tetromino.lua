@@ -66,4 +66,22 @@ function Tetromino:right()
 	end
 end
 
+function Tetromino:rotateClockwise(pivot, ...) 
+	local blocks = { ... }
+	for key, value in pairs(blocks) do
+		local i = value.y - pivot.y
+		value.y = (pivot.y + value.x) - pivot.x
+		value.x = pivot.x - i
+	end
+end
+
+function Tetromino:rotateCounterClockwise(pivot, ...) 
+	local blocks = { ... }
+	for key, value in pairs(blocks) do
+		local i = value.y - pivot.y	
+		value.y = (pivot.y - value.x) + pivot.x
+		value.x = pivot.x + i	
+	end
+end
+
 return Tetromino
