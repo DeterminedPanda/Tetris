@@ -21,10 +21,11 @@ end
 function GameField:fillTable()
 	local x = 0
 	local y = 0
+
 	for i = 1, field_height do
 		self.field[i] = { }
 		for j = 1, field_width do
-			local empty_block = EmptyBlock(x, y, block_size - 1, block_size - 1)
+			local empty_block = EmptyBlock(x, y)
 			self.field[i][j] = empty_block 
 			x = x + block_size
 		end
@@ -33,14 +34,16 @@ function GameField:fillTable()
 	end
 end
 
-function isInBounds(block) 
-
+function isInBounds(x, y) 
+	return x >= 1 and x <= field_width
 end
 
 function isDownEmpty(block)
 	local i = (block.y / block_size) + 2
 	local j = (block.x / block_size) + 1
-	return field[i][j]:is(EmptyBlock)
+	local isInBounds = isInBounds(j, i)
+
+	return isInBounds and field[i][j]:is(EmptyBlock)
 end
 
 function moveDown(block)
@@ -51,11 +54,14 @@ end
 function isLeftEmpty(block)
 	local i = (block.y / block_size) + 1 
 	local j = (block.x / block_size)
-	return field[i][j]:is(EmptyBlock) 
+	local isInBounds = isInBounds(j, i)
+
+	return isInBounds and field[i][j]:is(EmptyBlock)
 end
 
 function moveLeft(...)
 	local blocks = { ... }
+
 	for key, value in pairs(blocks) do
 		local j = (value.x / block_size) - 1
 		value.x = j * block_size
@@ -65,11 +71,14 @@ end
 function isRightEmpty(block)
 	local i = (block.y / block_size) + 1 
 	local j = (block.x / block_size) + 2
-	return field[i][j]:is(EmptyBlock)
+	local isInBounds = isInBounds(j, i)
+
+	return isInBounds and field[i][j]:is(EmptyBlock)
 end
 
 function moveRight(...)
 	local blocks = { ... }
+
 	for key, value in pairs(blocks) do
 		local j = (value.x / block_size) + 1
 		value.x = j * block_size

@@ -7,12 +7,12 @@ local state = 1
 -- 	block_three block_four
 -- the passed parameters will be assigned to block_one.
 -- the values for block_two, block_two and block_three will be calculated from the passed parameters
-function S:new(x, y, width, height)
+function S:new(x, y)
 	S.super.new(self)
-	S.block_one = Block(x, y, width, height)
-	S.block_two = Block(x + block_size, y, width, height)
-	S.block_three = Block(x - block_size, y + block_size, width, height) 
-	S.block_four = Block(x, y + block_size, width, height)
+	self.block_one = Block(x, y)
+	self.block_two = Block(x + block_size, y)
+	self.block_three = Block(x - block_size, y + block_size) 
+	self.block_four = Block(x, y + block_size)
 end
 
 function S:up()
@@ -34,7 +34,7 @@ function S:update(dt)
 end
 
 function S:draw()
-	love.graphics.setColor(0, 0, 1)
+	love.graphics.setColor(0.239, 1.0, 0.796)
 	S.super.draw(self)
 end
 

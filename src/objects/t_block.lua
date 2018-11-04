@@ -7,16 +7,16 @@ local state = 1
 --             block_one
 -- the passed parameters will be assigned to block_one.
 -- the values for block_three, block_four and block_two will be calculated from the passed parameters
-function T:new(x, y, width, height)
+function T:new(x, y)
 	T.super.new(self)
-	T.block_one = Block(x, y, width, height)
-	T.block_two = Block(x - block_size, y - block_size, width, height)
-	T.block_three = Block(x, y - block_size, width, height)
-	T.block_four = Block(x + block_size, y - block_size, width, height)
+	self.block_one = Block(x, y)
+	self.block_two = Block(x - block_size, y - block_size)
+	self.block_three = Block(x, y - block_size)
+	self.block_four = Block(x + block_size, y - block_size)
 end
 
 function T:up()
-	local success = T:rotateClockwise(T.block_three, T.block_one, T.block_two, T.block_four)
+	local success = self:rotateClockwise(self.block_three, self.block_one, self.block_two, self.block_four)
 end
 
 function T:update(dt)
@@ -24,7 +24,7 @@ function T:update(dt)
 end
 
 function T:draw()
-	love.graphics.setColor(0.500, 0.500, 0)
+	love.graphics.setColor(1.0, 0.239, 0.474)
 	T.super.draw(self)
 end
 

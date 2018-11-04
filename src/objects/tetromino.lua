@@ -1,10 +1,7 @@
 local Tetromino = Object:extend()
 
 function Tetromino:new()
-	self.block_one = nil
-	self.block_two = nil
-	self.block_three = nil
-	self.block_four = nil
+
 end
 
 function Tetromino:update(dt)

@@ -9,10 +9,10 @@ local state = 1
 -- the values for block_two, block_three and block_four will be calculated from the passed parameters.
 function Z:new(x, y, width, height)
 	Z.super.new(self)
-	Z.block_one = Block(x, y, width, height)
-	Z.block_two = Block(x + block_size, y, width, height)
-	Z.block_three = Block(x + block_size, y + block_size, width, height)
-	Z.block_four = Block(x + (block_size * 2), y + block_size, width, height)
+	self.block_one = Block(x, y)
+	self.block_two = Block(x + block_size, y)
+	self.block_three = Block(x + block_size, y + block_size)
+	self.block_four = Block(x + (block_size * 2), y + block_size)
 end
 
 function Z:up()
