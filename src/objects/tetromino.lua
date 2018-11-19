@@ -16,50 +16,26 @@ function Tetromino:draw()
 end
 
 function Tetromino:left()
-	local is_block_one_movable = isLeftEmpty(self.block_one)
-	local is_block_two_movable = isLeftEmpty(self.block_two)
-	local is_block_three_movable = isLeftEmpty(self.block_three)
-	local is_block_four_movable = isLeftEmpty(self.block_four)
+	local isEmpty = isLeftEmpty(self.block_one, self.block_two, self.block_three, self.block_four)
 
-	if(is_block_one_movable and is_block_two_movable and is_block_three_movable and is_block_four_movable) then
-		moveLeft(self.block_one)
-		moveLeft(self.block_two)
-		moveLeft(self.block_three)
-		moveLeft(self.block_four)
-	else 
-		print('collision detected')
+	if(isEmpty) then
+		moveLeft(self.block_one, self.block_two, self.block_three, self.block_four)
 	end
 end
 
 function Tetromino:down()
-	local is_block_one_movable = isDownEmpty(self.block_one)
-	local is_block_two_movable = isDownEmpty(self.block_two)
-	local is_block_three_movable = isDownEmpty(self.block_three)
-	local is_block_four_movable = isDownEmpty(self.block_four)
+	local isEmpty = isDownEmpty(self.block_one, self.block_two, self.block_three, self.block_four)
 
-	if(is_block_one_movable and is_block_two_movable and is_block_three_movable and is_block_four_movable) then
-		moveDown(self.block_one)
-		moveDown(self.block_two)
-		moveDown(self.block_three)
-		moveDown(self.block_four)
-	else 
-		print('collision detected')
+	if(isEmpty) then
+		moveDown(self.block_one, self.block_two, self.block_three, self.block_four)
 	end
 end
 
 function Tetromino:right()
-	local is_block_one_movable = isRightEmpty(self.block_one)
-	local is_block_two_movable = isRightEmpty(self.block_two)
-	local is_block_three_movable = isRightEmpty(self.block_three)
-	local is_block_four_movable = isRightEmpty(self.block_four)
+	local isEmpty = isRightEmpty(self.block_one, self.block_two, self.block_three, self.block_four)
 
-	if(is_block_one_movable and is_block_two_movable and is_block_three_movable and is_block_four_movable) then
-		moveRight(self.block_one)
-		moveRight(self.block_two)
-		moveRight(self.block_three)
-		moveRight(self.block_four)
-	else 
-		print('collision detected')
+	if(isEmpty) then
+		moveRight(self.block_one, self.block_two, self.block_three, self.block_four)
 	end
 end
 
@@ -79,6 +55,12 @@ function Tetromino:rotateCounterClockwise(pivot, ...)
 		value.y = (pivot.y - value.x) + pivot.x
 		value.x = pivot.x + i	
 	end
+end
+
+-- TODO implement
+function Tetromino:fuckshitup() 
+	self.block_one.x = 40
+	self.block_one.y = 40
 end
 
 return Tetromino

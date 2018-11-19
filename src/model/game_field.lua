@@ -38,42 +38,70 @@ function isInBounds(x, y)
 	return x >= 1 and x <= field_width
 end
 
-function isDownEmpty(block)
-	local i = (block.y / block_size) + 2
-	local j = (block.x / block_size) + 1
-	local isInBounds = isInBounds(j, i)
+function isDownEmpty(...)
+	local blocks = {...}
 
-	return isInBounds and field[i][j]:is(EmptyBlock)
+	for key, block in pairs(blocks) do
+		local i = (block.y / block_size) + 2
+		local j = (block.x / block_size) + 1
+		local isInBounds = isInBounds(j, i)
+
+		if(not isInBounds or not field[i][j]:is(EmptyBlock)) then
+			return false
+		end
+	end
+
+	return true
 end
 
-function moveDown(block)
-	local i = (block.y / block_size) + 1
-	block.y = i * block_size
+function moveDown(...)
+	local blocks = {...}
+
+	for key, block in pairs(blocks) do
+		local i = (block.y / block_size) + 1
+		block.y = i * block_size
+	end
 end
 
-function isLeftEmpty(block)
-	local i = (block.y / block_size) + 1 
-	local j = (block.x / block_size)
-	local isInBounds = isInBounds(j, i)
+function isLeftEmpty(...)
+	local blocks = {...}
 
-	return isInBounds and field[i][j]:is(EmptyBlock)
+	for key, block in pairs(blocks) do
+		local i = (block.y / block_size) + 1 
+		local j = (block.x / block_size)
+		local isInBounds = isInBounds(j, i)
+
+		if(not isInBounds or not field[i][j]:is(EmptyBlock)) then
+			return false
+		end
+	end
+
+	return true
 end
 
 function moveLeft(...)
 	local blocks = { ... }
 
-	for key, value in pairs(blocks) do
-		local j = (value.x / block_size) - 1
-		value.x = j * block_size
+	for key, block in pairs(blocks) do
+		local j = (block.x / block_size) - 1
+		block.x = j * block_size
 	end
 end
 
-function isRightEmpty(block)
-	local i = (block.y / block_size) + 1 
-	local j = (block.x / block_size) + 2
-	local isInBounds = isInBounds(j, i)
+function isRightEmpty(...)
+	local blocks = {...}
 
-	return isInBounds and field[i][j]:is(EmptyBlock)
+	for key, block in pairs(blocks) do
+		local i = (block.y / block_size) + 1 
+		local j = (block.x / block_size) + 2
+		local isInBounds = isInBounds(j, i)
+
+		if(not isInBounds or not field[i][j]:is(EmptyBlock)) then
+			return false
+		end
+	end
+
+	return true
 end
 
 function moveRight(...)

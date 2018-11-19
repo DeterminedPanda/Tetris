@@ -22,7 +22,10 @@ block_size = 40
 field_width = 10
 field_height = 22
 
+	current_block = ZBlock(40, 40)
 function love.load() 
+	local test = {{1, {123, 456}}, {2, {555, 666}}
+	print(test[1][1])
 	love.window.setTitle("Tetris")
 	-- block_size * field_height equals the minimum height required to show all 22 rows of blocks
 	love.window.setMode(800, block_size * field_height)
@@ -33,7 +36,6 @@ function love.load()
 	nextBlockWindow = NextBlockWindow()
 	savedBlockWindow = SavedBlockWindow()
 	field = gamefield.field
-	current_block = TBlock(40, 40)
 	debugblock = DebugBlock(160, 160, 40, 40)
 	field[5][5] = debugblock
 	input = Input()
@@ -41,7 +43,7 @@ function love.load()
 	input:bind('left', function() current_block:left() end)
 	input:bind('down', function() current_block:down() end)
 	input:bind('right', function() current_block:right() end)
-	input:bind('lshift', function() saveCurrentBlock() end)
+	input:bind('lshift', function() getNextBlock() end)
 end
 
 function love.update(dt) 

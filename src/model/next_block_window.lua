@@ -24,20 +24,23 @@ function generateNextBlock()
 		next_block = block_list[random_number](540, 100)
 	elseif(random_number == 3) then
 		next_block = block_list[random_number](540, 100)
-	elseif(random_number == 4)then
+	elseif(random_number == 4) then
 		next_block = block_list[random_number](560, 100)
 	elseif(random_number == 5) then
 		next_block = block_list[random_number](580, 100)
-	elseif(random_number == 6)then
+	elseif(random_number == 6) then
 		next_block = block_list[random_number](540, 100)
-	elseif(random_number == 7)then
+	elseif(random_number == 7) then
 		next_block = block_list[random_number](580, 140)
 	end
 end
 
 function getNextBlock()
-	--current_block = next_block
-	--generateNextBlock()
+	print("boop")
+	tmp = next_block
+	generateNextBlock()
+	current_block = tmp
+	current_block:fuckshitup()
 end
 
 return NextBlockWindow
